@@ -23,3 +23,12 @@ void writeServoAngle(int angle) {
 
   ledcWrite(SERVO_PIN, duty);
 }
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(POT_PIN, INPUT);
+  analogSetPinAttenuation(POT_PIN, ADC_11db);
+
+  ledcAttach(SERVO_PIN, SERVO_FREQUENCY_HZ, SERVO_RESOLUTION_BITS);
+  writeServoAngle(90);
+}
