@@ -32,3 +32,19 @@ void setup() {
   ledcAttach(SERVO_PIN, SERVO_FREQUENCY_HZ, SERVO_RESOLUTION_BITS);
   writeServoAngle(90);
 }
+
+void loop() {
+  int potValue = analogRead(POT_PIN);
+  int potClamped = constrain(potValue, POT_RAW_MIN, POT_RAW_MAX);
+  int servoAngle = map(potClamped, POT_RAW_MIN, POT_RAW_MAX, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
+
+  writeServoAngle(servoAngle);
+
+  Serial.print("Potentiometer: ");
+  Serial.print(potValue);
+  Serial.print(" | Angle from left edge: ");
+  Serial.print(servoAngle);
+  Serial.println(" deg");
+
+  delay(100);
+}
