@@ -38,3 +38,10 @@ GPIO5 -------┼🟠              |
              +----------------+
 
 ```
+
+
+## Result
+
+![Result](./result.gif)
+
+If GIF preview is not displayed in your viewer, open it directly: [result.gif](./result.gif)
