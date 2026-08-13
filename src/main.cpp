@@ -12,3 +12,14 @@ constexpr uint16_t SERVO_MIN_US = 500;
 constexpr uint16_t SERVO_MAX_US = 2500;
 constexpr uint32_t SERVO_FREQUENCY_HZ = 50;
 constexpr uint8_t SERVO_RESOLUTION_BITS = 14;
+
+void writeServoAngle(int angle) {
+  angle = constrain(angle, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE);
+
+  const uint32_t periodUs = 1000000UL / SERVO_FREQUENCY_HZ;
+  const uint32_t pulseUs = map(angle, SERVO_MIN_ANGLE, SERVO_MAX_ANGLE, SERVO_MIN_US, SERVO_MAX_US);
+  const uint32_t maxDuty = (1UL << SERVO_RESOLUTION_BITS) - 1;
+  const uint32_t duty = (pulseUs * maxDuty) / periodUs;
+
+  ledcWrite(SERVO_PIN, duty);
+}
